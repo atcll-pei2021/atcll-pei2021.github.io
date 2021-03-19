@@ -1395,9 +1395,9 @@ section {
   content: "";
   left: 0;
   bottom: 0;
-  height: 100%;
-  width: 100%;
-  background: url(../img/team-shape.svg) no-repeat center bottom;
+  height: 336px;
+  width: 336px;
+  /* background: url(../img/team-shape.svg) no-repeat center bottom;  */
   background-size: contain;
   z-index: 1;
 }
@@ -1437,23 +1437,31 @@ section {
 .team .member .member-info h4 {
   font-weight: 700;
   margin-bottom: 5px;
+  margin-top: 20px;
   font-size: 20px;
   color: #012970;
 }
 
 .team .member .member-info span {
   display: block;
-  font-size: 14px;
+  padding-bottom: 10px;
+  font-size: 16px;
   font-weight: 400;
   color: #aaaaaa;
 }
 
 .team .member .member-info p {
   font-style: italic;
-  font-size: 14px;
-  padding-top: 15px;
+  font-size: 15px;
+  padding-top: 0px;
   line-height: 26px;
-  color: #5e5e5e;
+  color: #000000;
+}
+
+.team .member .member-info a {
+  font-style: italic;
+  font-size: 15px;
+  line-height: 26px;
 }
 
 .team .member:hover {
