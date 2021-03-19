@@ -287,3 +287,15 @@
   });
 
 })();
+//ADDED
+function hide(text,dr){
+  var x = document.getElementById(text);
+  var y = document.getElementById(dr);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+    y.src="assets/img/up-arrow.png";
+  } else {
+    x.style.display = "none";
+    y.src="assets/img/down-arrow.png";
+  }
+}
