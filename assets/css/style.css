@@ -1414,7 +1414,7 @@ section {
 .team .member .social {
   position: absolute;
   right: -100%;
-  top: 30px;
+  top: 10px;
   opacity: 0;
   border-radius: 4px;
   transition: 0.5s;
@@ -1425,7 +1425,7 @@ section {
 .team .member .social a {
   transition: color 0.3s;
   color: rgba(1, 41, 112, 0.5);
-  margin: 15px 12px;
+  margin: 10px 10px 10px 10px;
   display: block;
   line-height: 0;
   text-align: center;
