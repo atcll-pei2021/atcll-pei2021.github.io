@@ -51,10 +51,15 @@
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="#services">Project</a></li>
-          <!-- <li><a class="nav-link scrollto" href="#portfolio">Portfolio</a></li> -->
-          <li><a class="nav-link scrollto" href="#team">Team</a></li>
-          <!--<li><a href="blog.html">Blog</a></li>
+          <li class="dropdown"><a class="nav-link"><span>Project</span> <i class="bi bi-chevron-down"></i></a>
+          <!-- <li><a href="#portfolio">Portfolio</a></li> -->
+          <ul>
+            <li><a class="scrollto" href="#goals">Goals</a></li>
+            <li><a  class="scrollto"  href="#results">Expectations</a></li>
+          </ul>
+        </li>
+          <a class="nav-link scrollto" href="#team">Team</a></li>
+          <!-- <li><a href="blog.html">Blog</a></li> 
           <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>
@@ -146,8 +151,84 @@
 
     </section><!-- End About Section -->
 
-    <!-- ======= Values Section ======= -->
-    <section id="values" class="values">
+
+    <!-- ======= Goals Section ======= -->
+    <section id="goals" class="services">
+
+      <div class="container" data-aos="fade-up">
+
+        <header class="section-header">
+          <h2>Goals</h2>
+          <p>Goals for this project</p>
+        </header>
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-box blue">
+              <i class="ri-sensor-line icon"></i>
+              <h3>Sensors</h3>
+              <p>Develop solutions to get values from the sensors.</p>
+              <!-- <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a> -->
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="service-box orange">
+              <i class="ri-global-line icon"></i>
+              <h3>Detection</h3>
+              <p>Develop mechanisms to detect people, “moliceiros”, movement, etc.</p>
+              <!-- <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a> -->
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="service-box green">
+              <i class="ri-rss-line icon"></i>
+              <h3>Brocker</h3>
+              <p>Develop a subscription broker to accumulate past and real time data.</p>
+              <!-- <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a> -->
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+            <div class="service-box red">
+              <i class="ri-pie-chart-line icon"></i>
+              <h3>Brocker Data</h3>
+              <p>Develop a web app to show the subscription broker’s data.</p>
+              <!-- <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a> -->
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+            <div class="service-box purple">
+              <i class="ri-window-line icon"></i>
+              <h3>Web APP</h3>
+              <p>Develop a web application to show all the processed data relative to the “moliceiros” traffic.</p>
+              <!-- <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a> -->
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="700">
+            <div class="service-box pink">
+              <i class="ri-team-line icon"></i>
+              <h3>Soft Skills</h3>
+              <p>Improve team-working skills and learn how to work with new technologies and equipments
+              </p>
+              <!-- <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a> -->
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- End Goals Section -->
+
+
+
+    <!-- ======= Results Section ======= -->
+    <section id="results" class="values">
 
       <div class="container" data-aos="fade-up">
 
@@ -187,7 +268,7 @@
 
       </div>
 
-    </section><!-- End Values Section -->
+    </section><!-- End Results Section -->
 
     <!-- ======= Counts Section ======= -->
     <!-- <section id="counts" class="counts">
@@ -242,7 +323,11 @@
     
     <!-- End Counts Section -->
 
-    <!-- ======= Features Section ======= -->
+
+    <!-- Features should be added later to the webpage -->
+
+<!-- 
+     ======= Features Section ======= 
     <section id="features" class="features">
 
       <div class="container" data-aos="fade-up">
@@ -250,7 +335,7 @@
         <header class="section-header">
           <h2>Features</h2>
           <p>Laboriosam et omnis fuga quis dolor direda fara</p>
-        </header>
+        </header> -->
 
         <!-- <div class="row">
 
@@ -308,12 +393,12 @@
 
         </div>-->
 
-        <!-- Feature Tabs -->
+        <!--
         <div class="row feture-tabs" data-aos="fade-up">
           <div class="col-lg-6">
             <h3>Neque officiis dolore maiores et exercitationem quae est seda lidera pat claero</h3>
 
-            <!-- Tabs -->
+            
             <ul class="nav nav-pills mb-3">
               <li>
                 <a class="nav-link active" data-bs-toggle="pill" href="#tab1">Saepe fuga</a>
@@ -324,9 +409,8 @@
               <li>
                 <a class="nav-link" data-bs-toggle="pill" href="#tab3">Corrupti</a>
               </li>
-            </ul><!-- End Tabs -->
+            </ul>
 
-            <!-- Tab Content -->
             <div class="tab-content">
 
               <div class="tab-pane fade show active" id="tab1">
@@ -341,7 +425,7 @@
                   <h4>Incidunt non veritatis illum ea ut nisi</h4>
                 </div>
                 <p>Non quod totam minus repellendus autem sint velit. Rerum debitis facere soluta tenetur. Iure molestiae assumenda sunt qui inventore eligendi voluptates nisi at. Dolorem quo tempora. Quia et perferendis.</p>
-              </div><!-- End Tab 1 Content -->
+              </div>
 
               <div class="tab-pane fade show" id="tab2">
                 <p>Consequuntur inventore voluptates consequatur aut vel et. Eos doloribus expedita. Sapiente atque consequatur minima nihil quae aspernatur quo suscipit voluptatem.</p>
@@ -355,7 +439,7 @@
                   <h4>Incidunt non veritatis illum ea ut nisi</h4>
                 </div>
                 <p>Non quod totam minus repellendus autem sint velit. Rerum debitis facere soluta tenetur. Iure molestiae assumenda sunt qui inventore eligendi voluptates nisi at. Dolorem quo tempora. Quia et perferendis.</p>
-              </div><!-- End Tab 2 Content -->
+              </div>
 
               <div class="tab-pane fade show" id="tab3">
                 <p>Consequuntur inventore voluptates consequatur aut vel et. Eos doloribus expedita. Sapiente atque consequatur minima nihil quae aspernatur quo suscipit voluptatem.</p>
@@ -369,7 +453,7 @@
                   <h4>Incidunt non veritatis illum ea ut nisi</h4>
                 </div>
                 <p>Non quod totam minus repellendus autem sint velit. Rerum debitis facere soluta tenetur. Iure molestiae assumenda sunt qui inventore eligendi voluptates nisi at. Dolorem quo tempora. Quia et perferendis.</p>
-              </div><!-- End Tab 3 Content -->
+              </div>
 
             </div>
 
@@ -379,9 +463,8 @@
             <img src="assets/img/features-2.png" class="img-fluid" alt="">
           </div>
 
-        </div><!-- End Feature Tabs -->
-
-        <!-- Feature Icons -->
+        </div>
+          
         <div class="row feature-icons" data-aos="fade-up">
           <h3>Features developed</h3>
 
@@ -447,83 +530,11 @@
 
           </div>
 
-        </div><!-- End Feature Icons -->
-
-      </div>
-
-    </section>
-
-    <!-- ======= Services Section ======= -->
-    <section id="services" class="services">
-
-      <div class="container" data-aos="fade-up">
-
-        <header class="section-header">
-          <h2>Project</h2>
-          <p>Veritatis et dolores facere numquam et praesentium</p>
-        </header>
-
-        <div class="row gy-4">
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="service-box blue">
-              <i class="ri-discuss-line icon"></i>
-              <h3>Nesciunt Mete</h3>
-              <p>Provident nihil minus qui consequatur non omnis maiores. Eos accusantium minus dolores iure perferendis tempore et consequatur.</p>
-              <!-- <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a> -->
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="service-box orange">
-              <i class="ri-discuss-line icon"></i>
-              <h3>Eosle Commodi</h3>
-              <p>Ut autem aut autem non a. Sint sint sit facilis nam iusto sint. Libero corrupti neque eum hic non ut nesciunt dolorem.</p>
-              <!-- <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a> -->
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-            <div class="service-box green">
-              <i class="ri-discuss-line icon"></i>
-              <h3>Ledo Markt</h3>
-              <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id voluptas adipisci eos earum corrupti.</p>
-              <!-- <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a> -->
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-            <div class="service-box red">
-              <i class="ri-discuss-line icon"></i>
-              <h3>Asperiores Commodi</h3>
-              <p>Non et temporibus minus omnis sed dolor esse consequatur. Cupiditate sed error ea fuga sit provident adipisci neque.</p>
-              <!-- <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a> -->
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
-            <div class="service-box purple">
-              <i class="ri-discuss-line icon"></i>
-              <h3>Velit Doloremque.</h3>
-              <p>Cumque et suscipit saepe. Est maiores autem enim facilis ut aut ipsam corporis aut. Sed animi at autem alias eius labore.</p>
-              <!-- <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a> -->
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="700">
-            <div class="service-box pink">
-              <i class="ri-discuss-line icon"></i>
-              <h3>Dolori Architecto</h3>
-              <p>Hic molestias ea quibusdam eos. Fugiat enim doloremque aut neque non et debitis iure. Corrupti recusandae ducimus enim.</p>
-              <!-- <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a> -->
-            </div>
-          </div>
-
         </div>
 
       </div>
 
-    </section><!-- End Services Section -->
+    </section> -->
 
     <!-- ======= Pricing Section ======= -->
     <!--<section id="pricing" class="pricing">
