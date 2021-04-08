@@ -34,15 +34,23 @@ jobs:
       - name: Generate HUGO Doc page
         run: |
           rm -r ./documentation/ || true
+          echo "---"
           ls
+          echo "---"
           cd doc_source/document/
+          echo "---"
           ls
+          echo "---"
           hugo --minify 
           cp -r ./public/ ../../documentation || true
           rm -r public || true
+          echo "---"
           ls
-          cd ${GITHUB_PATH}
+          echo "---"
+          cd ../..
+          echo "---"
           ls
+          echo "---"
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
