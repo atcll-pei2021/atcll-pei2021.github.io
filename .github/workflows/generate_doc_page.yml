@@ -32,14 +32,18 @@ jobs:
       
       # Runs a set of commands using the runners shell
       - name: Generate HUGO Doc page
+        working-directory: ${GITHUB_PATH}
         run: |
-          rm -r documentation/
+          rm -r documentation/ || true
+          ls
           cd doc_source/document/
+          ls
           hugo --minify 
-          cp -r ./public/ ../../documentation
-          rm -r public
-          cd ../..
-          
+          cp -r ./public/ ../../documentation || true
+          rm -r public || true
+          ls
+          cd ${GITHUB_PATH}
+          ls
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
