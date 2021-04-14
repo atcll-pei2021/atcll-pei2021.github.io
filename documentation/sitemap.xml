@@ -2,13 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://atcll-pei2021.github.io/documentation/Diagrams/</loc>
-    <priority>0</priority>
+    <loc>http://atcll-pei2021.github.io/documentation/Diagrams/Architecture/</loc>
   </url><url>
-    <loc>http://atcll-pei2021.github.io/documentation/Diagrams/Teste/</loc>
-    <priority>0</priority>
+    <loc>http://atcll-pei2021.github.io/documentation/Diagrams/Deployment/</loc>
+  </url><url>
+    <loc>http://atcll-pei2021.github.io/documentation/Diagrams/Domain/</loc>
+  </url><url>
+    <loc>http://atcll-pei2021.github.io/documentation/Diagrams/UseCases/</loc>
   </url><url>
     <loc>http://atcll-pei2021.github.io/documentation/categories/</loc>
+  </url><url>
+    <loc>http://atcll-pei2021.github.io/documentation/diagrams/</loc>
   </url><url>
     <loc>http://atcll-pei2021.github.io/documentation/</loc>
   </url><url>

@@ -2,12 +2,11 @@
 <html lang="en">
 
 <head>
-	<meta name="generator" content="Hugo 0.82.0" />
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Documentation">
+<meta name="description" content="Architecture">
 
-<title>Documentation | Documentation</title>
+<title>Architecture | Documentation</title>
 
 <link rel="icon" href="/documentation/favicon/favicon-32x32.png" type="image/x-icon">
 
@@ -32,7 +31,7 @@
 <link rel="preload" href="/documentation/custom.css" as="style">
 <link rel="stylesheet" href="/documentation/custom.css" media="all">
 
-<link rel="alternate" type="application/rss+xml" href="http://atcll-pei2021.github.io/documentation/index.xml" title="Documentation" />
+<link rel="alternate" type="application/rss+xml" href="http://atcll-pei2021.github.io/documentation/Diagrams/Architecture/index.xml" title="Documentation" />
 <!-- Made with Geekdoc theme https://github.com/thegeeklab/hugo-geekdoc -->
 
 </head>
@@ -124,7 +123,7 @@
             
             
                 <span class="flex">
-                    <a href="/documentation/Diagrams/Architecture/" class="gdoc-nav__entry ">
+                    <a href="/documentation/Diagrams/Architecture/" class="gdoc-nav__entry is-active">
                         Architecture
                     </a>
                 </span>
@@ -257,7 +256,23 @@
             
     
     
-        <li itemprop='itemListElement' itemscope itemtype='https://schema.org/ListItem'><span itemprop='name'>Documentation</span><meta itemprop='position' content='2' /></li>
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+    
+    
+        <li itemprop='itemListElement' itemscope itemtype='https://schema.org/ListItem'><a itemscope itemtype='https://schema.org/WebPage' itemprop='item' itemid='/documentation/' href='/documentation/'><span itemprop='name'>Documentation</span></a><meta itemprop='position' content='2' /></li><li> / </li><li itemprop='itemListElement' itemscope itemtype='https://schema.org/ListItem'><a itemscope itemtype='https://schema.org/WebPage' itemprop='item' itemid='/documentation/diagrams/' href='/documentation/diagrams/'><span itemprop='name'>Diagrams</span></a><meta itemprop='position' content='3' /></li><li> / </li><li itemprop='itemListElement' itemscope itemtype='https://schema.org/ListItem'><span itemprop='name'>Architecture</span><meta itemprop='position' content='4' /></li>
+    
+
+    
+
     
 
         </ol>
@@ -267,8 +282,17 @@
 </div>
 
     <article class="gdoc-markdown">
-        <h1>Documentation</h1>
-        
+        <h1>Architecture</h1>
+        <div class="gdoc-page__anchorwrap">
+    <h2 id="architecture-diagram">
+        Architecture diagram
+        <a data-clipboard-text="http://atcll-pei2021.github.io/documentation/Diagrams/Architecture/#architecture-diagram" class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Architecture diagram" href="#architecture-diagram">
+            <svg class="icon gdoc_link"><use xlink:href="#gdoc_link"></use></svg>
+        </a>
+    </h2>
+</div><p>The data relative to the number of people detected by Wi-Fi sniffing and object detection and the number of moliceiros detected by object detection is captured by the respective modules in the sensors and this data is sent to the broker through a MQTT connection. The broker saves the data in a database and also sends it to the Web service (Flask). The web server (Gunicorn) interacts with the Web service and communicates with the Reverse Proxy Server (Nginx) through a Unix socket. The Reverse Proxy Server manages the load balance of requests. The user visualizes the web application in his device, sending and receiving HTTPS requests and responses.</p>
+<div style="text-align:center"><img src="arquitetura_withbg.png" /></div>
+
 
     </article>
 
