@@ -1,6 +1,9 @@
 # atcll-pei2021.github.io
 
 ## Documentation
+### Before pushing the repo
+If you wrote some documentation files before pushing run the GenerateDocumentation.sh (make sure you have hugo installed)
+
 ### The doc_source folder
 On the doc_source folder you have the hugo project that generates the documentation, in the [geekdocs.de guide](https://geekdocs.de/usage/menus/) you have the full documentation on how to write the MD pages
 
