@@ -27,7 +27,7 @@ It's important to mention the gunicorn run atributes (**gunicorn --worker-class 
 
 We need to run the webapp service, so it will always be running using **sudo systemctl start webapp**
 
-###### NGIX
+###### NGINX
 
 We then need to configure the NGINX reverse proxy server, we need to link the local gunicorn and redirect it to the **dev.aveiro-open-lab.pt**.
 - The file is located in **/etc/nginx/sites-available/webapp**
