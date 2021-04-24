@@ -3,6 +3,9 @@ NVIDIA® DeepStream Software Development Kit (SDK) is an accelerated AI framewor
 The following section describes how to install DeepStream SDK on the **Jetson Nano**.
 All steps are also available [here](https://docs.nvidia.com/metropolis/deepstream/dev-guide/text/DS_Quickstart.html).
 
+>**Note:** 
+    The version 5.1 of the DeepStream SDK is only compatible with JetPack 4.5.1. 
+
 #### Install Jetson SDK components
 
 Download NVIDIA SDK Manager from https://developer.nvidia.com/embedded/jetpack. You will use this to install JetPack 4.5.1 GA (corresponding to L4T 32.5.1 release). This comes packaged with CUDA, TensorRT and cuDNN.
@@ -97,7 +100,9 @@ libgstreamer-plugins-base1.0-dev
     $ sudo apt install deepstream-5.1
     ```
 
-###### Method 5: Use Docker container DeepStream [docker containers](https://docs.nvidia.com/metropolis/deepstream/dev-guide/text/DS_docker_containers.html) are available on NGC. See the Docker Containers section to learn about developing and deploying DeepStream using docker containers.
+###### Method 5: Use Docker container 
+
+DeepStream [docker containers](https://docs.nvidia.com/metropolis/deepstream/dev-guide/text/DS_docker_containers.html) are available on NGC. See the Docker Containers section to learn about developing and deploying DeepStream using docker containers.
 
 #### Run deepstream-app (the reference application)
 
@@ -138,3 +143,50 @@ $ sudo jetson_clocks
     >**Note:** 
     If the application encounters errors and cannot create Gst elements, remove the GStreamer cache, then try again. To remove the GStreamer cache, enter this command: ```$ rm ${HOME}/.cache/gstreamer-1.0/registry.aarch64.bin```
     When the application is run for a model which does not have an existing engine file, it may take up to a few minutes (depending on the platform and the model) for the file generation and the application launch. For later runs, these generated engine files can be reused for faster loading.
+
+
+#### DeepStream application development in Python
+
+Python bindings are included in the DeepStream 5.1 SDK and the sample applications are available [here](https://github.com/NVIDIA-AI-IOT/deepstream_python_apps).
+
+All steps are also available [here](https://docs.nvidia.com/metropolis/deepstream/dev-guide/text/DS_Python_Sample_Apps.html#).
+
+###### Prerequisites
+
+- Ubuntu 18.04
+- DeepStream SDK 5.1 or later
+- Python 3.6
+- Gst Python v1.14.5. If Gst python installation is missing on Jetson, install using the following commands:
+
+```
+$ sudo apt-get install python-gi-dev
+$ export GST_LIBS="-lgstreamer-1.0 -lgobject-2.0 -lglib-2.0"
+$ export GST_CFLAGS="-pthread -I/usr/include/gstreamer-1.0 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include"
+$ git clone https://github.com/GStreamer/gst-python.git
+$ cd gst-python
+$ git checkout 1a8f48a
+$ ./autogen.sh PYTHON=python3
+$ ./configure PYTHON=python3
+$ make
+$ sudo make install
+```
+
+###### Running Sample Applications
+
+1. Clone the ```deepstream_python_apps``` repo under ```<DeepStream 5.1 ROOT>/sources```
+
+    ```
+    $ git clone https://github.com/NVIDIA-AI-IOT/deepstream_python_apps
+    ```
+
+2. This will create the following directory:
+
+    ```
+    $ <DeepStream 5.1 ROOT>/sources/deepstream_python_apps
+    ```
+
+3. The Python apps are under the ```apps``` directory. Go into each app directory and follow instructions in the README.
+
+    >**Note:** 
+        The app configuration files contain relative paths for models.
+
