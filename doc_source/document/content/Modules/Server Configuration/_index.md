@@ -22,7 +22,7 @@ WantedBy=multi-user.target
 
 It's important to mention the gunicorn run atributes (**gunicorn --worker-class eventlet -w 1 --bind="0.0.0.0:5000" app:app**)
  - **--worker-class eventlet -w 1** These attributes are used to run the web server using the asynchronous process for socket.io
- - **--bind="0.0.0.0:5000"** Indicates gunicorn the address and port the app and socket is running, **NEEDS TO BE THE SAME AS THE ONES IN THE PYTHON APP**
+ - **--bind="0.0.0.0:5000"** Indicates gunicorn the address and port the app and socket is running, **NEEDS TO BE THE SAME AS THE ONE IN THE NGINX CONFIGURATION FILE**
  - **app:app** Indicates gunicorn the name and attribute of the flask web application
 
 We need to run the webapp service, so it will always be running using **sudo systemctl start webapp**
