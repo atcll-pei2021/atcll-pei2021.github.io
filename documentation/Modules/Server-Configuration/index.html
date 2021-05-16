@@ -2,37 +2,38 @@
 Documentation</span></a></div></header><main class="container flex flex-even"><aside class=gdoc-nav><nav><div class=gdoc-search><svg class="icon gdoc_search"><use xlink:href="#gdoc_search"/></svg><input type=text id=gdoc-search-input class=gdoc-search__input placeholder=Search... aria-label=Search maxlength=64><div class="gdoc-search__spinner spinner hidden"></div><ul id=gdoc-search-results class=gdoc-search__list></ul></div><section class=gdoc-nav--main><h2>Navigation</h2><ul class=gdoc-nav__list><li><span class=flex>Diagrams</span><ul class=gdoc-nav__list><li><span class=flex><a href=/documentation/Diagrams/Architecture-Diagram/ class=gdoc-nav__entry>Architecture Diagram</a></span></li><li><span class=flex><a href=/documentation/Diagrams/Deployment-Diagram/ class=gdoc-nav__entry>Deployment Diagram</a></span></li><li><span class=flex><a href=/documentation/Diagrams/Domain-Diagram/ class=gdoc-nav__entry>Domain Diagram</a></span></li><li><span class=flex><a href=/documentation/Diagrams/Use-Cases-Diagrams/ class=gdoc-nav__entry>Use Cases Diagrams</a></span></li></ul></li><li><span class=flex>Modules</span><ul class=gdoc-nav__list><li><span class=flex><a href=/documentation/Modules/Server-Configuration/ class="gdoc-nav__entry is-active">Server Configuration</a></span></li><li><span class=flex><a href=/documentation/Modules/Sniffing/ class=gdoc-nav__entry>Sniffing</a></span></li><li><span class=flex><a href=/documentation/Modules/WebApp/ class=gdoc-nav__entry>Web App</a></span></li></ul></li><li><span class=flex>Tools</span><ul class=gdoc-nav__list><li><span class=flex><a href=/documentation/Tools/DeepStream-SDK-Installation/ class=gdoc-nav__entry>Deep Stream Sdk Installation</a></span></li></ul></li></ul></section><section class=gdoc-nav--more></section></nav></aside><div class=gdoc-page><div class="gdoc-page__header flex flex-wrap
 justify-between
 hidden-mobile" itemprop=breadcrumb><div><svg class="icon gdoc_path hidden-mobile"><use xlink:href="#gdoc_path"/></svg><ol class=breadcrumb itemscope itemtype=https://schema.org/BreadcrumbList><li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a itemscope itemtype=https://schema.org/WebPage itemprop=item itemid=/documentation/ href=/documentation/><span itemprop=name>Documentation</span></a><meta itemprop=position content="2"></li><li>/</li><li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a itemscope itemtype=https://schema.org/WebPage itemprop=item itemid=/documentation/modules/ href=/documentation/modules/><span itemprop=name>Modules</span></a><meta itemprop=position content="3"></li><li>/</li><li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>Server Configuration</span><meta itemprop=position content="4"></li></ol></div></div><article class=gdoc-markdown><h1>Server Configuration</h1><p>The following topics describe the server configuration following the work flow to do so:</p><ul><li>The WebAppDev repository was cloned to the virtual machine</li></ul><div class=gdoc-page__anchorwrap><h6 id=gunicorn>Gunicorn
-<a data-clipboard-text=http://atcll-pei2021.github.io/documentation/Modules/Server-Configuration/#gunicorn class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Gunicorn" href=#gunicorn><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg></a></h6></div><ul><li>A service of gunicorn was created to run the web application using <strong>eventlet</strong> on the same address and port of socket instanced on the web application.
+<a data-clipboard-text=http://atcll-pei2021.github.io/documentation/Modules/Server-Configuration/#gunicorn class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Gunicorn" href=#gunicorn><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg></a></h6></div><ul><li>A service of gunicorn was created to run the web application using <strong>gevent</strong> on the same address and port of socket instanced on the web application.
 The file is located in <strong>/etc/systemd/system/webapp.service</strong></li></ul><pre><code>[Unit]
-Description=Gunicorn instance to serve PEI2021_NAP project
+Description=Gunicorn instance to serve PEI2021_NAP project 
 After=network.target
 
 [Service]
-User=hugolardosa
+User=root
 Group=www-data
-WorkingDirectory=path/WebAppDev
-Environment=&quot;PATH=path/WebAppDev/avenv/bin&quot;
-ExecStart=path/WebAppDev/avenv/bin/gunicorn --worker-class eventlet -w 1 --bind=&quot;0.0.0.0:5000&quot; app:app
+WorkingDirectory=/atcll-webapp-flask
+Environment=&quot;PATH=/atcll-webapp-flask/venv/bin&quot;
+ExecStart=/atcll-webapp-flask/venv/bin/gunicorn '__init__:create_app()' -k gevent --worker-connections 1000 --bind 0.0.0.0:5000
 
 [Install]
 WantedBy=multi-user.target
-</code></pre><p>It&rsquo;s important to mention the gunicorn run atributes (<strong>gunicorn &ndash;worker-class eventlet -w 1 &ndash;bind=&ldquo;0.0.0.0:5000&rdquo; app:app</strong>)</p><ul><li><strong>&ndash;worker-class eventlet -w 1</strong> These attributes are used to run the web server using the asynchronous process for socket.io</li><li><strong>&ndash;bind=&ldquo;0.0.0.0:5000&rdquo;</strong> Indicates gunicorn the address and port the app and socket is running, <strong>NEEDS TO BE THE SAME AS THE ONE IN THE NGINX CONFIGURATION FILE</strong></li><li><strong>app:app</strong> Indicates gunicorn the name and attribute of the flask web application</li></ul><p>We need to run the webapp service, so it will always be running using <strong>sudo systemctl start webapp</strong></p><div class=gdoc-page__anchorwrap><h6 id=nginx>NGINX
+</code></pre><p>It&rsquo;s important to mention the gunicorn run atributes (<strong>gunicorn &lsquo;<strong>init</strong>:create_app()&rsquo; -k gevent &ndash;worker-connections 1000 &ndash;bind 0.0.0.0:5000</strong>)</p><ul><li><strong>gevent &ndash;worker-connections 1000</strong> These attributes allow for the server to handle multiple requests and use server sent envents</li><li><strong>&ndash;bind=&ldquo;0.0.0.0:5000&rdquo;</strong> Indicates gunicorn the address and port the app and socket is running, <strong>NEEDS TO BE THE SAME AS THE ONE IN THE NGINX CONFIGURATION FILE</strong></li><li><strong>'<strong>init</strong>:create_app()'</strong> Indicates gunicorn the name and attribute of the flask web application</li></ul><p>We need to run the webapp service, so it will always be running using <strong>sudo systemctl start webapp</strong></p><div class=gdoc-page__anchorwrap><h6 id=nginx>NGINX
 <a data-clipboard-text=http://atcll-pei2021.github.io/documentation/Modules/Server-Configuration/#nginx class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor NGINX" href=#nginx><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg></a></h6></div><p>We then need to configure the NGINX reverse proxy server, we need to link the local gunicorn and redirect it to the <strong>dev.aveiro-open-lab.pt</strong>.</p><ul><li>The file is located in <strong>/etc/nginx/sites-available/webapp</strong></li></ul><p>We start the file by pointing the / in the server to the local web app (0:0:0:0:5000)</p><pre><code>server{
-        server_name dev.aveiro-open-lab.pt;
+	server_name dev.aveiro-open-lab.pt;
 
-        location / {
+	location / {
             include proxy_params;
-            proxy_pass http://0.0.0.0:5000;
+	    proxy_pass http://0.0.0.0:5000;
+	    proxy_buffering off;
+    	    proxy_cache off;
+            proxy_set_header Host $host;
+            proxy_set_header Connection '';
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+	    proxy_http_version 1.1;
+            chunked_transfer_encoding off;
         }
 
-</code></pre><p>Then, we need to point the /socket.io on the server to the local socket 0.0.0.0:5000 one</p><pre><code>        location /socket.io{
-         include proxy_params;
-         proxy_http_version 1.1;
-         proxy_buffering off;
-         proxy_set_header Upgrade $http_upgrade;
-         proxy_set_header Connection &quot;Upgrade&quot;;
-         proxy_pass http://0.0.0.0:5000/socket.io;
-        }
+
 </code></pre><p>The rest of the file was generated by certbot so we can have the webapp running on https</p><pre><code>    listen 443 ssl; # managed by Certbot
     ssl_certificate /etc/letsencrypt/live/dev.aveiro-open-lab.pt/fullchain.pem; # managed by Certbot
     ssl_certificate_key /etc/letsencrypt/live/dev.aveiro-open-lab.pt/privkey.pem; # managed by Certbot
