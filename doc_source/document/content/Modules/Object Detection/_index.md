@@ -108,7 +108,7 @@ The **unique values** are sent in a time interval of 60 seconds and they are the
 This captured data is sent to a local broker in 6 different topics:
 
 ```python
-broker_address = "atcll-p1-jetson.nap.av.it.pt"
+broker_address = "####.nap.av.it.pt"
 port = 1883
 
 #current
