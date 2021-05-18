@@ -192,3 +192,9 @@ To continue running after closing the ssh session:
 ```
  nohup python3 -u detector2.py rtsp://admin:admin@192.168.115.9/11 </dev/null >/dev/null 2>&1 &
 ```
+
+#### References
+
+
+
+[Guide on how to install DeepStream SDK on the Jetson Nano](https://docs.nvidia.com/metropolis/deepstream/dev-guide/text/DS_Quickstart.html)
