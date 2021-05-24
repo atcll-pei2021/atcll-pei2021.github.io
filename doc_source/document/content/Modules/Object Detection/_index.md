@@ -1,6 +1,6 @@
-## Object Detection Module
+## Context
 
-This module allows the detection of three diferent types of objects (poeple, vehicles and two wheeler vehicles) using a SDK called DeepStream running on a Jetson Nano.
+This module allows the detection of three diferent types of objects (people, vehicles and two wheeler vehicles) using a SDK called DeepStream running on a service in a Jetson Nano.
 
 
 ## Main functions
@@ -108,8 +108,6 @@ The **unique values** are sent in a time interval of 60 seconds and they are the
 This captured data is sent to a local broker in 6 different topics:
 
 ```python
-broker_address = "####.nap.av.it.pt"
-port = 1883
 
 #current
 currentppl_topic = "detection/people/current"
