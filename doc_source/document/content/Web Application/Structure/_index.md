@@ -7,7 +7,7 @@ The web application is a flask app, running on the gunicorn server and uses NGIN
 - auth.py - management of the accounts: validation and intermediate on the access to the database
 - /templates - folder containing all the Static rendered Jinja2 HTML files
   - /templates/template.html - contains the base HTML page for the dashboard
-  - /templates/detection.html - extends _template_ and has the HTML code to show the detection of vehicles, devices, people and two wheelers
+  - /templates/detection.html - extends _template_ and has the HTML code to show the detection of vehicles, devices, people and two-wheelers
   - /templates/moliceiros.html - extends _template_ and has the HTML code to show the detection data of moliceiros
   - /templates/base.html - contains the base HTML page for managing the accounts
   - /templates/login.html - extends _base_ and has the HTML code to login into the account
@@ -16,16 +16,16 @@ The web application is a flask app, running on the gunicorn server and uses NGIN
 
 ## Main functions
 The main functions of the app are:
- - main.detection() - renders the template of the main page where the detection data of vehicles, people, devices and two wheelers is showed.
+ - main.detection() - renders the template of the main page where the detection data of vehicles, people, devices and two-wheelers is showed.
  - main.people() - renders the template of the page where the detection data of moliceiros is showed.
- - auth.login() - takes care of the account authentication and the page is rendered based on the sucess of it
- - auth.signup() - takes care of the creation of accounts and the page is rendered based on the sucess of it
+ - auth.login() - takes care of the account authentication and the page is rendered based on the success of it
+ - auth.signup() - takes care of the creation of accounts and the page is rendered based on the success of it
  - auth.logout() - logouts the account and redirects to the main page, the detection dashboard
 
 To render the HTML pages with **jinja** the functions return *render_template('person.html', pagename="Moliceiros and People detection")* the argument **pagename** renders the page name on the html files
 
 ## Broker access
-In flask we access the broker and subscribe to topics to get real time data. On these lines of code we access the broker
+In flask, we access the broker and subscribe to topics to get real-time data. On these lines of code we access the broker
 ```python
 app.config['MQTT_BROKER_URL'] = '###.nap.av.it.pt'
 app.config['MQTT_BROKER_PORT'] = 1883
@@ -51,36 +51,15 @@ def handle_mqtt_message(client, userdata, message):
     print(data)
 ```
 
-## Socket IO
-To show in real time the broker data from flask to HTML, we need to open a socket using socket.io, for that in the app.py file we:
-create a variable named **socketio = SocketIO(app)**, and when receiving a message from the broker we send the data to the socket **socketio.emit('mqtt_message', data=data)**
+## Server Sent Events (SSE)
+To show in real time the broker data from flask to HTML, we need to open a socket using server sent events, for that in the app.py file app routes were created  for the server sent events, where is returned a Response of type **"text/event-stream"**
 
-On the **html - template page**:
-
-```html
-  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
-  <script type="text/javascript" charset="utf-8">
-    $(document).ready(function() {
-      var socket = io();
-      socket.on('connect', function() {
-          socket.emit('my event', {data: 'I\'m connected!'});
-      });
-
-      // listen for mqtt_message events
-      // when a new message is received, log and append the data to the page
-      socket.on('mqtt_message', (data) => {
-        console.log(data);
-        $('#sniffing_div').html(data['payload']); //replace sniffing div
-      })
-    });
-  </script>
-```
-We connect to the socket and then send the data to the corresponded div
+For the **html - template page**, on the DIVS regarding the cards and charts a connection to the respective SSE is made, and the values are showed in real-time. 
 
 ## Account's Database
 In order to store and manage the user's accounts it was created an SQLite database called __user__.
 
-Flask makes it more intuitive and pratical with the integration of classes/libraries like: _SQLAlchemy_, _LoginManager_ and _UserMixin_.
+Flask makes it more intuitive and practical with the integration of classes/libraries like: _SQLAlchemy_, _LoginManager_ and _UserMixin_.
 
 - SQLAlchemy - library that facilitates the communication between the app and the database
 - LoginManager - class used to hold the settings used for logging in
@@ -137,4 +116,19 @@ def get_locale():
     if request.args.get('lang'):
         session['lang'] = request.args.get('lang')
     return session.get('lang', 'en')
+```
+To generate the translation files the following steps need to be made:
+
+Run the pybabel command that comes with Babel to extract your strings:
+```
+pybabel extract -F babel.cfg -o messages.pot .
+```
+
+Generate the language translation file (ex.: pt)
+```
+pybabel init -i messages.pot -d translations -l pt
+```
+After translating the web application strings on the generated file (ex.: pt.po) compile
+```
+pybabel compile -d translations  
 ```
