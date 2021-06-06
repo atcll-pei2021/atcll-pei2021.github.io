@@ -14,19 +14,28 @@ The goal of this API is to promote an easy access to all of the data that can be
 #### Sniffing Information
 ```GET``` /api/sniffing  
 - URL parameters
+    
     ```start = [integer]```
+
     ```end = [integer]```
+
     ```bucket = day|hour|minute```
+
     ```group = count|avg|sum|min|max```
+
 
 - Example call
 https://dev.aveiro-open-lab.pt/api/sniffing?start=1621300462000&end=1621372462000&bucket=hour&group=count
 
 ```GET``` /api/sniffingunique
 - URL parameters
+    
     ```start = [integer]```
+
     ```end = [integer]```
+
     ```bucket = day|hour|minute```
+
     ```group = count|avg|sum|min|max```
 
 - Example call
@@ -37,9 +46,13 @@ https://dev.aveiro-open-lab.pt/api/sniffingunique?start=1621300462000&end=162137
 
 ```GET``` /api/people
 - URL parameters
+
     ```start = [integer]```
+
     ```end = [integer]```
+
     ```bucket = day|hour|minute```
+
     ```group = count|avg|sum|min|max```
 
 - Example call
@@ -47,9 +60,13 @@ https://dev.aveiro-open-lab.pt/api/people?start=1621300462000&end=1621372462000&
 
 ```GET``` /api/peopleunique
 - URL parameters
+
     ```start = [integer]```
+
     ```end = [integer]```
+
     ```bucket = day|hour|minute```
+
     ```group = count|avg|sum|min|max```
 
 - Example call
@@ -57,9 +74,13 @@ https://dev.aveiro-open-lab.pt/api/peopleunique?start=1621300462000&end=16213724
 
 ```GET``` /api/vehicle
 - URL parameters
+
     ```start = [integer]```
+
     ```end = [integer]```
+
     ```bucket = day|hour|minute```
+
     ```group = count|avg|sum|min|max```
 
 - Example call
@@ -67,9 +88,13 @@ https://dev.aveiro-open-lab.pt/api/vehicle?start=1621300462000&end=1621372462000
 
 ```GET``` /api/vehicleunique
 - URL parameters
+
     ```start = [integer]```
+
     ```end = [integer]```
+
     ```bucket = day|hour|minute```
+
     ```group = count|avg|sum|min|max```
 
 - Example call
@@ -77,9 +102,13 @@ https://dev.aveiro-open-lab.pt/api/vehicleunique?start=1621300462000&end=1621372
 
 ```GET``` /api/twowheeler
 - URL parameters
+
     ```start = [integer]```
+
     ```end = [integer]```
+
     ```bucket = day|hour|minute```
+
     ```group = count|avg|sum|min|max```
 
 - Example call
@@ -87,9 +116,13 @@ https://dev.aveiro-open-lab.pt/api/twowheeler?start=1621300462000&end=1621372462
 
 ```GET``` /api/twowheelerunique
 - URL parameters
+
     ```start = [integer]```
+
     ```end = [integer]```
+
     ```bucket = day|hour|minute```
+    
     ```group = count|avg|sum|min|max```
 
 - Example call
@@ -121,25 +154,35 @@ There are also endpoints that control the movement of a rotational camera. All o
 
 
 ```POST``` | ```GET``` /api/cam/up
+
 ```POST``` | ```GET``` /api/cam/down
+
 ```POST``` | ```GET``` /api/cam/left
+
 ```POST``` | ```GET``` /api/cam/right
 
 ```POST``` | ```GET``` /api/cam/upleft
+
 ```POST``` | ```GET``` /api/cam/upright
+
 ```POST``` | ```GET``` /api/cam/downright
+
 ```POST``` | ```GET``` /api/cam/downleft
 
 ```POST``` | ```GET``` /api/cam/zoomin
+
 ```POST``` | ```GET``` /api/cam/zoomout
 
 ```POST``` | ```GET``` /api/cam/focusin
+
 ```POST``` | ```GET``` /api/cam/focusout
 
 ```POST``` | ```GET``` /api/cam/irisin
+
 ```POST``` | ```GET``` /api/cam/irisout
 
 ```POST``` | ```GET``` /api/cam/auto
+
 ```POST``` | ```GET``` /api/cam/autostop
 
 
