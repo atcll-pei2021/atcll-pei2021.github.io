@@ -175,7 +175,7 @@ count = 0
         bk_numbers = (num_people, num_vehicles, num_twowheelers)
 ```
 
-#### Connection to Central Broker
+### Connection to Central Broker
 
 All of the messages sent in topics to the local brokers are then sent to the central broker in IT to be accessed in the web application.
 
@@ -191,7 +191,7 @@ To continue running after closing the ssh session:
  nohup python3 -u detector2.py rtsp://admin:admin@192.168.115.9/11 </dev/null >/dev/null 2>&1 &
 ```
 
-#### References
+### References
 
 
 

@@ -5,7 +5,7 @@ The object detection script runs on a Jetson Nano located at IT. Jetson Nano is 
 <div style="display: block;margin-left: auto;margin-right: auto;width:400px"><img src="Jetson-Nano-isometric.png" /></div>
 
 
-#### Local broker
+### Local broker
 
 During the detection in the video stream the number of detected objects is sent to a local broker in 6 different topics, which then sends these values to the central broker in IT.
 
@@ -31,7 +31,7 @@ The sniffing script runs on two different APUs. One is located in a smart lamp p
 
 <div style="display: block;margin-left: auto;margin-right: auto;width:400px"><img src="apu2c4_1.jpg" /></div>
 
-#### Local broker
+### Local broker
 
 During the detection of MAC address the number of devices is sent to a local broker in 2 different topics, which then sends these values to the central broker in IT.
 
@@ -53,7 +53,7 @@ To be updated
 
 The detection running on the devices are started after the Linux kernel is booted using services units and ```systemd``` to manage them. The units are located in the folder ```/etc/systemd/system```.
 
-#### APUs
+### APUs
 
 ```
 [Unit]
@@ -71,7 +71,7 @@ Restart=always
 WantedBy=multi-user.target
 ```
 
-#### Jetson Nano
+### Jetson Nano
 
 ```
 [Unit]
@@ -88,7 +88,7 @@ Restart=always
 WantedBy=multi-user.target
 ```
 
-#### References
+### References
 
 
 [Jetson Nano information](https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-nano/)

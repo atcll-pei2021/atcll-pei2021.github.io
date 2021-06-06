@@ -11,7 +11,7 @@ The goal of this API is to promote an easy access to all of the data that can be
 
 
 
-#### Sniffing Information
+### Sniffing Information
 ```GET``` /api/sniffing  
 - URL parameters
     
@@ -42,7 +42,7 @@ https://dev.aveiro-open-lab.pt/api/sniffing?start=1621300462000&end=162137246200
 https://dev.aveiro-open-lab.pt/api/sniffingunique?start=1621300462000&end=1621372462000&bucket=hour&group=count
 
 
-#### Detection Information
+### Detection Information
 
 ```GET``` /api/people
 - URL parameters
@@ -128,7 +128,7 @@ https://dev.aveiro-open-lab.pt/api/twowheeler?start=1621300462000&end=1621372462
 - Example call
 https://dev.aveiro-open-lab.pt/api/twowheelerunique?start=1621300462000&end=1621372462000&bucket=hour&group=count
 
-#### Sensors
+### Sensors
 
 These ends points return information related to the status of the services running on the different detection modules. This allows the application to know when the services stop running and to alert the administrator in case of such event.
 
@@ -148,7 +148,7 @@ https://dev.aveiro-open-lab.pt/api/sensors/p1_apu
 https://dev.aveiro-open-lab.pt/api/sensors/pei_jetson
 
 
-#### Camera controls
+### Camera controls
 
 There are also endpoints that control the movement of a rotational camera. All of these endpoints follow the the call structure ```https://dev.aveiro-open-lab.pt/api/cam/<action>```.
 
@@ -186,7 +186,7 @@ There are also endpoints that control the movement of a rotational camera. All o
 ```POST``` | ```GET``` /api/cam/autostop
 
 
-#### Authentication
+### Authentication
 
 There are reserved endpoints that allow the authentication of users and thus control the access to certain resources. 
 

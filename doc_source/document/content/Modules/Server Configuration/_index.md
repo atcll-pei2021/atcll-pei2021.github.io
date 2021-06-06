@@ -1,6 +1,6 @@
 The following topics describe the server configuration following the work flow to do so:
 - The WebAppDev repository was cloned to the virtual machine
-###### Gunicorn
+## Gunicorn
 - A service of gunicorn was created to run the web application using **gevent**  on the same address and port of socket instanced on the web application.
 The file is located in **/etc/systemd/system/webapp.service**
 
@@ -27,7 +27,7 @@ It's important to mention the gunicorn run atributes (**gunicorn '__init__:creat
 
 We need to run the webapp service, so it will always be running using **sudo systemctl start webapp**
 
-###### NGINX
+## NGINX
 
 We then need to configure the NGINX reverse proxy server, we need to link the local gunicorn and redirect it to the **dev.aveiro-open-lab.pt**.
 - The file is located in **/etc/nginx/sites-available/webapp**
