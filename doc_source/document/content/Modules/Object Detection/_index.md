@@ -120,59 +120,67 @@ uniquevehicles_topic = "detection/vehicle/unique"
 uniquetwowheelers_topic = "detection/twowheelers/unique"
 ```
 
-Since the data has to be sent in different time intervals, its handling has to be separate. To prevent sending several messages with the value 0 for hours (like for example during the night) to the broker, the code was changed in order to supress sending repeated zeros. To do this, every time a message is sent, it has to be checked if the previous message was a 0 and if the current message is also a 0.
+Since the data has to be sent in different time intervals, its handling has to be separate. 
+
+The real time data relating to the number of objects detected is sent every second. To prevent sending several messages with the value 0 for hours (like for example during the night) to the broker, the code was changed in order to supress sending repeated zeros. To do this, every time a message is sent, it has to be checked if the previous message was a 0 and if the current message is also a 0.
+
+The median of people that pass in a certain area during an exact hour is obtained by calculating the average between six values sent every 10 times during the full hour. This allows the calculation of a more accurate estimation of the traffic of people in that specific time period. These values are then persisted in a database.
 
 ```python
 count = 0
     while True:
-        if count == 60:
-            previous_unique_p = num_people_unique
-            previous_unique_v = num_vehicles_unique
-            previous_unique_t = num_twowheelers_unique
+        #After five minutes restarts the count
+        if count == 5*60:
+            unpeople = json.dumps({"value" : sum_people, "TimeStamp" : time.time()})
+            client.publish(uniqueppl_topic, unpeople)
 
-            if not previous_unique_p == 0 or num_people_unique != 0:
-                unpeople = json.dumps({"value" : num_people_unique, "TimeStamp" : time.time()})
-                client.publish(uniqueppl_topic, unpeople)
+            unvehicles = json.dumps({"value" : sum_vehicles, "TimeStamp" : time.time()})
+            client.publish(uniquevehicles_topic, unvehicles)
 
-            if not previous_unique_v == 0 or num_vehicles_unique != 0:
-                unvehicles = json.dumps({"value" : num_vehicles_unique, "TimeStamp" : time.time()})
-                client.publish(uniquevehicles_topic, unvehicles)
+            untwowheelers = json.dumps({"value" : sum_twowheelers, "TimeStamp" : time.time()})
+            client.publish(uniquetwowheelers_topic, untwowheelers)
 
-            if not previous_unique_t == 0 or num_twowheelers_unique != 0:
-                untwowheelers = json.dumps({"value" : num_twowheelers_unique, "TimeStamp" : time.time()})
-                client.publish(uniquetwowheelers_topic, untwowheelers)
-
-            num_people_unique = 0
-            num_vehicles_unique = 0
-            num_twowheelers_unique = 0
+            sum_people = 0
+            sum_vehicles = 0
+            sum_twowheelers = 0
             count = 0
+            people_warning = 0
+            vehicles_warning = 0
+            twowheelers_warning = 0
 
-        time.sleep(1)  #manda os valores de 1 em 1 segundo
-
+        time.sleep(1) # sends values every second
+        count += 1
         dif = (num_people - bk_numbers[0], num_vehicles - bk_numbers[1], num_twowheelers - bk_numbers[2])
         if dif[0] > 0:
-            num_people_unique += dif[0]
+            sum_people += num_people
+            if sum_people > 25 and people_warning == 0:
+                webhook.send("[Object Detection] More than 25 people!" + str(num_people))
+                people_warning = 1
         if dif[1] > 0:
-            num_vehicles_unique += dif[1]
+            sum_vehicles += num_vehicles
+            if sum_vehicles > 50 and vehicles_warning == 0:
+                webhook.send("[Object Detection] More than 50 vehicles!" + str(num_vehicles))
+                vehicles_warning = 1
         if dif[2] > 0:
-            num_twowheelers_unique += dif[2]
-        count += 1
+            sum_twowheelers += num_twowheelers
+            if sum_twowheelers > 25 and twowheelers_warning == 0:
+                webhook.send("[Object Detection] More than 25 twowheelers!" + str(num_twowheelers))
+                twowheelers_warning = 1
 
-        if not previous_current_p == 0 or num_people != 0:
+
+        if not bk_numbers[0] == 0 or num_people != 0:
             crpeople = json.dumps({"value" : num_people, "TimeStamp" : time.time()})
             client.publish(currentppl_topic, crpeople)
-            previous_current_p = num_people
 
-        if not previous_current_v == 0 or num_vehicles != 0:
+        if not bk_numbers[1] == 0 or num_vehicles != 0:
             crvehicles = json.dumps({"value" : num_vehicles, "TimeStamp" : time.time()})
             client.publish(currentvehicles_topic, crvehicles)
-            previous_current_v = num_vehicles
 
-        if not previous_current_t == 0 or num_twowheelers != 0:
+        if not bk_numbers[2] == 0 or num_twowheelers != 0:
             crtwowheelers = json.dumps({"value" : num_twowheelers, "TimeStamp" : time.time()})
             client.publish(currenttwowheelers_topic, crtwowheelers)
-            previous_current_t = num_twowheelers
         bk_numbers = (num_people, num_vehicles, num_twowheelers)
+
 ```
 
 #### Connection to Central Broker
@@ -192,7 +200,5 @@ To continue running after closing the ssh session:
 ```
 
 #### References
-
-
 
 [Guide on how to install DeepStream SDK on the Jetson Nano](https://docs.nvidia.com/metropolis/deepstream/dev-guide/text/DS_Quickstart.html)
