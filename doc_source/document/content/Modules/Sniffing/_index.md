@@ -16,7 +16,7 @@ ifconfig wlan1 up
 ## Threads
 
 In this file there are 2 running threads and 1 main function running permanently: ***chopping()*** thread, ***run_broker()*** thread and the main function where the PyShark is capturing the packets. 
-The first thread, chopping, is responsible for constantly switching wifi channels through 1, 6 and 11. The broker thread implements the producer-side of the broker where the messages are sent and are later consumed by the web app. 
+The first thread, chopping, is responsible for constantly switching wifi channels through 1, 6 and 11. The broker thread implements the producer-side of the broker where the messages are sent and are later consumed by the Web App. 
 ```python
 for channel in channels:
 	os.system("iwconfig " + monitor_iface + " channel " + str(channel) + " > /dev/null 2>&1")	
@@ -37,10 +37,20 @@ def  main():
 
 ## Packet Handling
 
-As probe request packets are being captured by PyShark, they are processed by a function, ***packetHandler()***, which filters packets that only are sent by client devices searching for access points in broadcast. Therefore, all AP's sending beacon frames advertising their SSID as well as devices already connected to a certain SSID/access point are all dropped. After this process, the function retrieves the mac address from the packet and records the current time. This pair of values are saved this in a dictionary and represent the current list of in range devices. Afterward, the same mac address is introduced into the unique devices set, in order to prevent repetitions of the same mac address. In the end of every iteration of this function, another function is called: ***peopleUpdate()*** which goes through the dictionary of the current devices and checks the difference between the current time and the time when each mac address was captured and if the difference is greater than 5 seconds that pair of value stored in the dictionary is removed. 
+As probe request packets are being captured by PyShark, they are processed by a function, ***packetHandler()***, which filters packets that only are sent by client devices searching for access points in broadcast. Therefore, all AP's sending beacon frames advertising their SSID as well as devices already connected to a certain SSID/access point are all dropped. After this process, the function retrieves the mac address from the packet and marks the current time. This pair of values are saved this in a dictionary and represent the current list of in range devices. Afterward, the same mac address is introduced into the unique devices set, in order to prevent repetitions of the same mac address. In the end of every iteration of this function, another function is called: ***peopleUpdate()*** which goes through the dictionary of the current devices and checks the difference between the current time and the time when each mac address was captured and if the difference is greater than 5 seconds that pair of value stored in the dictionary is removed. 
 
 ## Broker
 
-The broker connects to the IP address and a port of the broker installed on the Jetson's post and publishes messages on 2 different topics: **"sniffing/current"** and **"sniffing/unique"**. The first topic is where the current number of devices is published every 5 seconds while the second topic contains the number of unique devices, sent every 60 seconds. 
+The broker connects to the IP address and a port of the broker installed on the Jetson's post and publishes messages on 2 different topics: **"sniffing/current"** and **"sniffing/unique"**. The first topic is where the current number of devices is published every 5 seconds while the second topic contains the number of unique devices, sent every 10 minutes. 
+
+
+## Current and Unique Datasets
+
+As previously described, the current devices being detected through Wifi Sniffing are stored until they don't send probe requests for at least 5 seconds. After these 5 seconds they are removed from the list that stores them. These current values are sent to the central broker every 5 seconds, in order to be used by the Web App, showing the number of devices captured in real time.
+The unique values are stored before being sent to the central broker, every 10 minutes. This prevents an accumulation of values and of misleading data as one person can pass near the Smart Lamp Posts during the morning and during the afternoon only being counted once. This implementation also allows the calculation of the average unique devices that were detected. In order to achieve this, the code calculates the average of all the captured devices in intervals of 1 minute. After 10 minutes, all values that were stored are excluded from the set. In order to get the  detected values in intervals of 1 hour, the Web App gets the average of all the 10 minutes interval values in that specific hour from the API.
+
+
+
+
 
 
