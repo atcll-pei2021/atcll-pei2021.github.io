@@ -202,7 +202,11 @@ https://dev.aveiro-open-lab.pt/signup
 - Example call
 https://dev.aveiro-open-lab.pt/logout
 
-<!-- ## Access to the Instituto de Telecomunicações API -->
+## Access to external APIs
+
+Since the data is being persisted in a IT database, there is an access to the NAP group's API to obtain all the needed data. This leads to the necessity of obtaining daily tokens to be able to execute sucessful requests.
+
+In addition, to control the IP camera installed in Cais da Fonte Nova through the developed methods, a token is also required, so a new one is obtained everytime the status of the requests to the camera's API are not successful.
 
 
 
